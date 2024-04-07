@@ -1,5 +1,6 @@
 #
-# Copyright (C) 2023-2024 The LineageOS Project
+# Copyright (C) 2023 The LineageOS Project
+#               
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -8,27 +9,37 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit from device.
-$(call inherit-product, $(LOCAL_PATH)/device.mk)
+# Inherit from veux device
+$(call inherit-product, device/xiaomi/veux/device.mk)
 
-# Inherit some common Lineage stuff.
+# Inherit some common Matrixx stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2400
-TARGET_SCREEN_WIDTH := 1080
+# Matrixx 
+MATRIXX_BUILD_TYPE := Official
+MATRIXX_MAINTAINER := AswinOP
+MATRIXX_CHIPSET := SM6375
+MATRIXX_BATTERY := 5000mAh
+MATRIXX_DISPLAY := 1080X2400
 
-PRODUCT_BRAND := Redmi
+# Gapps
+WITH_GMS := true
+
+# AOSP Recovery
+TARGET_USES_AOSP_RECOVERY := true
+
+# BOOT_ANIMATION
+TARGET_BOOT_ANIMATION_RES := 1080
+
+#Exclude prebuilt apps
+TARGET_EXCLUDES_AUDIOFX := true
+TARGET_EXCLUDES_AUXIO := true
+TARGET_EXCLUDES_VIA := true
+	
+# Device identifier
+PRODUCT_NAME := lineage_veux
 PRODUCT_DEVICE := veux
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_MODEL := 2201116SG
-PRODUCT_NAME := lineage_veux
-PRODUCT_SYSTEM_NAME := veux_global
-
+PRODUCT_BRAND := POCO
+PRODUCT_MODEL := POCO X4 Pro 5G
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="veux_global-user 13 TKQ1.221114.001 V14.0.6.0.TKCMIXM release-keys" \
-    TARGET_PRODUCT=$(PRODUCT_SYSTEM_NAME)
-
-BUILD_FINGERPRINT := Redmi/veux_global/veux:13/TKQ1.221114.001/V14.0.6.0.TKCMIXM:user/release-keys
